@@ -1,6 +1,8 @@
 import {card} from './card.js';
-import {pageStates} from './page-states.js';
+import {formStates} from './form-states.js';
+import {getMapFilter} from './map-filter.js'
 
+const ANNOUNCEMENT_COUNT = 10;
 
 const address = document.querySelector('#address');
 const TokyoCenterCoordinates = {
@@ -28,11 +30,19 @@ const mainMarker = L.marker(
   },
 );
 
+const icon = L.icon({
+  iconUrl: 'img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
+let markers = Array();
+
 const leafletMap = {
-  create(markersData) {
-    pageStates.makeInactive();
+  create() {
+    formStates.makeInactive();
     map.on('load', () => {
-      pageStates.makeActive();
+      formStates.makeActive();
     }).setView(TokyoCenterCoordinates, 10);
 
     L.tileLayer(
@@ -47,17 +57,25 @@ const leafletMap = {
     mainMarker.on('moveend', (evt) => {
       address.value = evt.target.getLatLng().lat.toFixed(5) + ', ' + evt.target.getLatLng().lng.toFixed(5)
     });
+  },
+  removeMarkers() {
+    if(markers.length !== 0) {
+      markers.forEach((marker) => {
+        map.removeLayer(marker)
+      })
+      markers = [];
+    }
+  },
+  addMarkers(data) {
+    leafletMap.removeMarkers();
+    const markersData = data.slice();
+    const markersFilteredData = markersData.filter(getMapFilter)
 
-    markersData.forEach(({location}, number) => {
-      const icon = L.icon({
-        iconUrl: 'img/pin.svg',
-        iconSize: [40, 40],
-        iconAnchor: [20, 40],
-      });
+    markersFilteredData.slice(0, ANNOUNCEMENT_COUNT).forEach(({location}, number) => {
       const lat = location.lat;
       const lng = location.lng;
 
-      const marker = L.marker(
+      const marker = new L.marker(
         {
           lat,
           lng,
@@ -66,11 +84,13 @@ const leafletMap = {
           icon,
         },
       );
-      marker
+      markers.push(marker);
+      markers[number]
         .addTo(map)
-        .bindPopup(card.showOnPage(markersData[number]));
+        .bindPopup(card.showOnPage(markersFilteredData[number]));
     });
   },
+
   reset() {
     map.setView(TokyoCenterCoordinates, 10);
     mainMarker.setLatLng(TokyoCenterCoordinates);

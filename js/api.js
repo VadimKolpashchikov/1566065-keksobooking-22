@@ -1,13 +1,15 @@
 import {showLoadingErrorMessage} from './notifications.js'
+import {mapFormStates} from './form-states.js';
 
-const ANNOUNCEMENT_COUNT = 10;
 const SERVER_ADDRESS = 'https://22.javascript.pages.academy/keksobooking';
 
 const getData = (onSuccess) => {
+  mapFormStates.makeInactive()
   fetch(SERVER_ADDRESS + '/data')
     .then((response) => response.json())
     .then((data) => {
-      onSuccess(data.slice(0, ANNOUNCEMENT_COUNT));
+      onSuccess(data);
+      mapFormStates.makeActive();
     })
     .catch(() => {
       showLoadingErrorMessage();

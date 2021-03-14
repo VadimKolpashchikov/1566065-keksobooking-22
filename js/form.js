@@ -1,5 +1,6 @@
 import {showErrorMessage, showSuccessMessage} from './notifications.js'
 import {sendData} from './api.js'
+import {resetPreviewImg} from './preview-img.js'
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -16,6 +17,7 @@ const capacityElements = capacity.querySelectorAll('option')
 const withoutGuests = capacity.querySelector('[value="0"]')
 const titleInput = form.querySelector('#title');
 const clearButton = form.querySelector('.ad-form__reset');
+
 
 const minHousingPrice = {
   flat: 1000,
@@ -114,6 +116,7 @@ const announcementForm = {
       }
     });
     withoutGuests.setAttribute('hidden', 'true');
+    resetPreviewImg();
   },
   submit(onSuccess) {
     form.addEventListener('submit', (evt) => {
