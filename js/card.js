@@ -84,7 +84,7 @@ const card = {
       onScreenItem.offer.photos.forEach((photo) => {
         newPhoto.src = photo;
         photoFragment.appendChild(newPhoto);
-        newPhoto = newPhoto.cloneNode(true)
+        newPhoto = newPhoto.cloneNode(true);
       });
     }
 
@@ -94,4 +94,4 @@ const card = {
   },
 };
 
-export {card}
+export {card};

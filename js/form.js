@@ -136,4 +136,4 @@ const announcementForm = {
   },
 }
 
-export {announcementForm}
+export {announcementForm};

@@ -3,14 +3,14 @@ const formElements = form.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
 const mapFiltersElements = Array.from (mapFilters.children);
 
-const makeAble  = (item) => {
-  item.forEach((element) => {
+const enable = (items) => {
+  items.forEach((element) => {
     element.removeAttribute('disabled')
   });
 };
 
-const makeDisabled = (item) => {
-  item.forEach((element) => {
+const makeDisabled = (items) => {
+  items.forEach((element) => {
     element.setAttribute('disabled', 'true')
   });
 };
@@ -22,7 +22,7 @@ const formStates = {
   },
   makeActive() {
     form.classList.remove('ad-form--disabled');
-    makeAble(formElements);
+    enable(formElements);
   },
 }
 
@@ -33,8 +33,8 @@ const mapFormStates = {
   },
   makeActive() {
     mapFilters.classList.remove('map__filters--disabled');
-    makeAble(mapFiltersElements);
+    enable(mapFiltersElements);
   },
 }
 
-export {formStates, mapFormStates}
+export {formStates, mapFormStates};

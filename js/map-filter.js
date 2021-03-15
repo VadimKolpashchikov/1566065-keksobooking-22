@@ -1,4 +1,5 @@
-/* global _:readonly */
+import {getDifferenceArray} from './util.js'
+
 const DEFAULT = 'any'
 
 const mapFilters = document.querySelector('.map__filters');
@@ -10,40 +11,23 @@ const housingFeatures = mapFilters.querySelector('#housing-features');
 let filterResult = true;
 
 const variantsHousingPrice = {
-  middleMin: 10000,
-  middleMax: 50000,
-  lowMin: 0,
-  lowMax: 10000,
-  highMin: 50000,
-  highMax: 100000000,
+  middle: 10000,
+  low: 0,
+  high: 50000,
 };
 
-const getMapFilter = (data) => {
-
-  if (housingRooms.value === DEFAULT) {
-    filterResult = true
-  } else if (data.offer.rooms === Number(housingRooms.value)) {
-    filterResult = true
-  } else {return  false}
-
-  if (housingType.value === DEFAULT) {
-    filterResult = true
-  } else if (data.offer.type === housingType.value) {
-    filterResult = true
-  } else {return  false}
-
-  if (housingGuests.value === DEFAULT) {
-    filterResult = true
-  } else if (data.offer.guests === Number(housingGuests.value)) {
-    filterResult = true
-  } else {return  false}
+const priceFilter = (data) => {
+  const maxPrice = housingPrice.querySelector('option:checked').getAttribute('max');
 
   if (housingPrice.value === DEFAULT) {
     filterResult = true
-  } else if (data.offer.price > variantsHousingPrice[housingPrice.value + 'Min'] && data.offer.price < variantsHousingPrice[housingPrice.value + 'Max']) {
+  } else if (data.offer.price > variantsHousingPrice[housingPrice.value] && data.offer.price <= maxPrice) {
     filterResult = true
-  } else {return  false}
+  } else {return false}
+  return filterResult
+};
 
+const featuresFilter = (data) => {
   const selectedFeatures = housingFeatures.querySelectorAll('.map__checkbox:checked');
   let selectedFeaturesNames = Array();
 
@@ -51,14 +35,44 @@ const getMapFilter = (data) => {
     selectedFeaturesNames.push(feature.value)
   });
 
-  const differencesFeatures = _.difference(selectedFeaturesNames, data.offer.features);
+  let differencesFeatures = Array();
+
+  getDifferenceArray(selectedFeaturesNames, data.offer.features, differencesFeatures)
 
   if (selectedFeaturesNames.length === 0) {
     filterResult = true
   } else if (differencesFeatures.length === 0) {
     filterResult = true
-  } else {return  false}
+  } else {return false}
+  return filterResult
+};
 
+const guestsAndRoomsFilter = (data, typeFilter, typeValue) => {
+  if (typeValue.value === DEFAULT) {
+    filterResult = true
+  } else if (typeFilter === Number(typeValue.value)) {
+    filterResult = true
+  } else {return false}
+  return filterResult
+};
+
+const housingTypeFilter = (data) => {
+  if (housingType.value === DEFAULT) {
+    filterResult = true
+  } else if (data.offer.type === housingType.value) {
+    filterResult = true
+  } else {return false}
+  return filterResult
+};
+
+const getMapFilter = (data) => {
+  if (housingTypeFilter(data) &&
+  priceFilter(data) &&
+  featuresFilter(data) &&
+  guestsAndRoomsFilter(data, data.offer.rooms, housingRooms) &&
+  guestsAndRoomsFilter(data, data.offer.guests, housingGuests)) {
+    filterResult = true
+  } else {return false}
   return filterResult
 };
 
@@ -68,4 +82,7 @@ const customizeMapFilterClick = (cb) => {
   })
 };
 
-export {getMapFilter, customizeMapFilterClick}
+export {getMapFilter, customizeMapFilterClick};
+
+
+

@@ -38,9 +38,9 @@
           </select>
           <select name="housing-price" id="housing-price" class="map__filter">
             <option value="any" selected>Любая</option>
-            <option value="middle">10000 - 50000&#x20bd;</option>
-            <option value="low">до 10000&#x20bd;</option>
-            <option value="high">от 50000&#x20bd;</option>
+            <option value="middle" max="50000">10000 - 50000&#x20bd;</option>
+            <option value="low" max="10000">до 10000&#x20bd;</option>
+            <option value="high" max="100000000">от 50000&#x20bd;</option>
           </select>
           <select name="housing-rooms" id="housing-rooms" class="map__filter">
             <option value="any" selected>Любое число комнат</option>
@@ -254,7 +254,6 @@
       <button type="button" class="error__button">Попробовать снова</button>
     </div>
   </template>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
   <script src="js/main.js" type="module"></script>
   <script src="leaflet/leaflet.js"
           integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="

@@ -33,4 +33,4 @@ const showSuccessMessage = () => {
   }, TIMEOUT);
 };
 
-export{showErrorMessage, showSuccessMessage, showLoadingErrorMessage}
+export{showErrorMessage, showSuccessMessage, showLoadingErrorMessage};
