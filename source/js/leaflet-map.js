@@ -1,6 +1,8 @@
 import {card} from './card.js';
 import {formStates} from './form-states.js';
-import {getMapFilter} from './map-filter.js'
+import {getMapFilter} from './map-filter.js';
+import * as L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const ANNOUNCEMENT_COUNT = 10;
 
@@ -10,7 +12,7 @@ const TokyoCenterCoordinates = {
   lng: 139.69171,
 };
 address.value = TokyoCenterCoordinates.lat.toFixed(5) + ', ' + TokyoCenterCoordinates.lng.toFixed(5);
-/* global L:readonly */
+
 
 const map = L.map('map-canvas');
 const mainPinIcon = L.icon({
