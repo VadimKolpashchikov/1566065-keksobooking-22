@@ -3,7 +3,7 @@ import {announcementForm} from './form.js';
 import {getData} from './api.js';
 import {customizeMapFilterClick} from './map-filter.js';
 import {showAvatarImg, showHousingPhoto} from './preview-img.js';
-import {debounce} from './util.js'
+import {debounce} from './util.js';
 
 const RERENDER_DELAY = 500;
 let markersData = Array();

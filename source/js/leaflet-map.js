@@ -101,6 +101,6 @@ const leafletMap = {
     resetMapFilter();
     this.addMarkers(data);
   },
-}
+};
 
 export {leafletMap}

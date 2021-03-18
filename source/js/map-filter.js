@@ -1,6 +1,6 @@
-import {getDifferenceArray} from './util.js'
+import {getDifferenceArray} from './util.js';
 
-const DEFAULT = 'any'
+const DEFAULT = 'any';
 
 const mapFilters = document.querySelector('.map__filters');
 const housingType = mapFilters.querySelector('#housing-type');
@@ -84,6 +84,6 @@ const customizeMapFilterClick = (cb) => {
 
 const resetMapFilter = () => {
   mapFilters.reset();
-}
+};
 
 export {getMapFilter, customizeMapFilterClick, resetMapFilter};

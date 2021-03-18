@@ -24,7 +24,7 @@ const formStates = {
     form.classList.remove('ad-form--disabled');
     enable(formElements);
   },
-}
+};
 
 const mapFormStates = {
   makeInactive() {
@@ -35,6 +35,6 @@ const mapFormStates = {
     mapFilters.classList.remove('map__filters--disabled');
     enable(mapFiltersElements);
   },
-}
+};
 
 export {formStates, mapFormStates};

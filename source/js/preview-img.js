@@ -27,7 +27,7 @@ const showAvatarImg = () => {
       reader.readAsDataURL(file);
     }
   });
-}
+};
 
 const showHousingPhoto = () => {
   fileHousingPhotoChooser.addEventListener('change', () => {
@@ -54,11 +54,11 @@ const showHousingPhoto = () => {
       reader.readAsDataURL(file);
     }
   });
-}
+};
 
 const resetPreviewImg = () => {
   previewAvatarImg.src = AVATAR_DEFAULT;
   previewHousingPhotoContainer.innerHTML = '';
-}
+};
 
 export {showAvatarImg, showHousingPhoto, resetPreviewImg}

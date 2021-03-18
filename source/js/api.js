@@ -1,4 +1,4 @@
-import {showLoadingErrorMessage} from './notifications.js'
+import {showLoadingErrorMessage} from './notifications.js';
 import {mapFormStates} from './form-states.js';
 
 const SERVER_ADDRESS = 'https://22.javascript.pages.academy/keksobooking';
@@ -15,7 +15,7 @@ const getData = (onSuccess) => {
       showLoadingErrorMessage();
       onSuccess();
     });
-}
+};
 
 const sendData = (data, onSuccess, dataReset, successMessage, errorMessage) => {
   fetch(
@@ -35,6 +35,6 @@ const sendData = (data, onSuccess, dataReset, successMessage, errorMessage) => {
     .catch(() => {
       errorMessage();
     });
-}
+};
 
 export {getData, sendData}

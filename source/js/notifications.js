@@ -1,4 +1,4 @@
-import {isEscEvent} from './util.js'
+import {isEscEvent} from './util.js';
 
 const taskSuccessMessageTemplate = document.querySelector('#success').content;
 const successMessageTemplate = taskSuccessMessageTemplate.querySelector('.success');
@@ -17,7 +17,7 @@ const showLoadingErrorMessage = () => {
   loadingErrorButton.addEventListener('click', () => {
     loadingErrorMessage.remove();
   });
-}
+};
 
 const hideMessage = (type) => {
   type.remove();
@@ -32,7 +32,7 @@ const hideMessage = (type) => {
   document.removeEventListener('click', () => {
     hideMessage(type);
   });
-}
+};
 
 const showErrorMessage = () => {
   document.body.append(errorMessage);

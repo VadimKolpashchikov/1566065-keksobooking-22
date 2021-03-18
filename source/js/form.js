@@ -1,6 +1,6 @@
-import {showErrorMessage, showSuccessMessage} from './notifications.js'
-import {sendData} from './api.js'
-import {resetPreviewImg} from './preview-img.js'
+import {showErrorMessage, showSuccessMessage} from './notifications.js';
+import {sendData} from './api.js';
+import {resetPreviewImg} from './preview-img.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -13,8 +13,8 @@ const typeHousing = form.querySelector('#type');
 const priceInput = form.querySelector('#price');
 const capacity = form.querySelector('#capacity');
 const roomNumber = form.querySelector('#room_number');
-const capacityElements = capacity.querySelectorAll('option')
-const withoutGuests = capacity.querySelector('[value="0"]')
+const capacityElements = capacity.querySelectorAll('option');
+const withoutGuests = capacity.querySelector('[value="0"]');
 const titleInput = form.querySelector('#title');
 const clearButton = form.querySelector('.ad-form__reset');
 
@@ -23,7 +23,7 @@ const minHousingPrice = {
   bungalow: 0,
   house: 5000,
   palace: 10000,
-}
+};
 
 const announcementForm = {
   addValidation() {
@@ -133,6 +133,6 @@ const announcementForm = {
       mapReset();
     });
   },
-}
+};
 
 export {announcementForm};

@@ -3,13 +3,13 @@ const ROOMS_TEXT_FORM = [
   ' комнаты',
   ' комнат',
 
-]
+];
 
 const GUESTS_TEXT_FORM = [
   ' гостя',
   ' гостей',
   ' гостей',
-]
+];
 
 const changeEndings = (numbers, textForm) => {
   if (numbers === 1) {
