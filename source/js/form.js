@@ -18,7 +18,6 @@ const withoutGuests = capacity.querySelector('[value="0"]')
 const titleInput = form.querySelector('#title');
 const clearButton = form.querySelector('.ad-form__reset');
 
-
 const minHousingPrice = {
   flat: 1000,
   bungalow: 0,

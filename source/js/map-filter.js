@@ -82,7 +82,8 @@ const customizeMapFilterClick = (cb) => {
   })
 };
 
-export {getMapFilter, customizeMapFilterClick};
+const resetMapFilter = () => {
+  mapFilters.reset();
+}
 
-
-
+export {getMapFilter, customizeMapFilterClick, resetMapFilter};

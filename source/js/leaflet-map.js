@@ -3,6 +3,7 @@ import {formStates} from './form-states.js';
 import {getMapFilter} from './map-filter.js';
 import * as L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {resetMapFilter} from './map-filter';
 
 const ANNOUNCEMENT_COUNT = 10;
 
@@ -93,10 +94,12 @@ const leafletMap = {
     });
   },
 
-  reset() {
+  reset(data) {
     map.setView(TokyoCenterCoordinates, 10);
     mainMarker.setLatLng(TokyoCenterCoordinates);
     address.value = TokyoCenterCoordinates.lat.toFixed(5) + ', ' + TokyoCenterCoordinates.lng.toFixed(5);
+    resetMapFilter();
+    this.addMarkers(data);
   },
 }
 

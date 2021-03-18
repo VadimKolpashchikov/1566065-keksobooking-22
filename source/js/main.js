@@ -6,6 +6,7 @@ import {showAvatarImg, showHousingPhoto} from './preview-img.js';
 import {debounce} from './util.js'
 
 const RERENDER_DELAY = 500;
+let markersData = Array();
 
 leafletMap.create();
 getData((data) => {
@@ -14,13 +15,13 @@ getData((data) => {
     () => leafletMap.addMarkers(data),
     RERENDER_DELAY,
   ));
+  data.forEach((element) => {
+    markersData.push(element)
+  });
 });
+
+announcementForm.clear(() => leafletMap.reset(markersData));
+announcementForm.submit(() => leafletMap.reset(markersData));
 announcementForm.addValidation();
-announcementForm.clear(leafletMap.reset);
-announcementForm.submit(leafletMap.reset);
 showAvatarImg();
 showHousingPhoto();
-
-
-
-

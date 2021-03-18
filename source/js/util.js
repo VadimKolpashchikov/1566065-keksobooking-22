@@ -18,4 +18,8 @@ const getDifferenceArray = (firstArray, secondArray, differencesArray) => {
   })
 };
 
-export {debounce, getDifferenceArray};
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+};
+
+export {debounce, getDifferenceArray, isEscEvent};

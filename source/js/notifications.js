@@ -1,4 +1,4 @@
-const TIMEOUT = 2000;
+import {isEscEvent} from './util.js'
 
 const taskSuccessMessageTemplate = document.querySelector('#success').content;
 const successMessageTemplate = taskSuccessMessageTemplate.querySelector('.success');
@@ -19,18 +19,50 @@ const showLoadingErrorMessage = () => {
   });
 }
 
+const hideMessage = (type) => {
+  type.remove();
+
+  document.removeEventListener('keydown', (evt) => {
+    if (isEscEvent(evt)) {
+      evt.preventDefault();
+      hideMessage(type);
+    }
+  });
+
+  document.removeEventListener('click', () => {
+    hideMessage(type);
+  });
+}
+
 const showErrorMessage = () => {
   document.body.append(errorMessage);
   errorButton.addEventListener('click', () => {
-    errorMessage.remove();
-  })
+    hideMessage(errorMessage)
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (isEscEvent(evt)) {
+      evt.preventDefault();
+      hideMessage(errorMessage);
+    }
+  });
+
+  document.addEventListener('click', () => {
+    hideMessage(errorMessage);
+  });
 };
 
 const showSuccessMessage = () => {
   document.body.append(successMessage);
-  setTimeout(() => {
-    successMessage.remove();
-  }, TIMEOUT);
+  document.addEventListener('keydown', (evt) => {
+    if (isEscEvent(evt)) {
+      evt.preventDefault();
+      hideMessage(successMessage);
+    }
+  });
+
+  document.addEventListener('click', () => {
+    hideMessage(successMessage);
+  });
 };
 
 export{showErrorMessage, showSuccessMessage, showLoadingErrorMessage};
