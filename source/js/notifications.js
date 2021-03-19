@@ -12,6 +12,17 @@ const loadingErrorMessageTemplate = taskLoadingErrorMessageTemplate.querySelecto
 const loadingErrorMessage = loadingErrorMessageTemplate.cloneNode(true);
 const loadingErrorButton = loadingErrorMessage.querySelector('.load-error__button');
 
+const closeWithKey = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    hideMessage();
+  }
+};
+
+const closeWithClick = () => {
+  hideMessage();
+};
+
 const showLoadingErrorMessage = () => {
   document.body.append(loadingErrorMessage);
   loadingErrorButton.addEventListener('click', () => {
@@ -19,50 +30,27 @@ const showLoadingErrorMessage = () => {
   });
 };
 
-const hideMessage = (type) => {
-  type.remove();
+const showSuccessMessage = () => {
+  document.body.append(successMessage);
+  document.addEventListener('keydown', closeWithKey);
+  document.addEventListener('click', closeWithClick);
 
-  document.removeEventListener('keydown', (evt) => {
-    if (isEscEvent(evt)) {
-      evt.preventDefault();
-      hideMessage(type);
-    }
-  });
-
-  document.removeEventListener('click', () => {
-    hideMessage(type);
-  });
 };
 
 const showErrorMessage = () => {
   document.body.append(errorMessage);
+  document.addEventListener('keydown', closeWithKey);
+  document.addEventListener('click', closeWithClick);
   errorButton.addEventListener('click', () => {
-    hideMessage(errorMessage)
-  });
-  document.addEventListener('keydown', (evt) => {
-    if (isEscEvent(evt)) {
-      evt.preventDefault();
-      hideMessage(errorMessage);
-    }
-  });
-
-  document.addEventListener('click', () => {
-    hideMessage(errorMessage);
+    hideMessage();
   });
 };
 
-const showSuccessMessage = () => {
-  document.body.append(successMessage);
-  document.addEventListener('keydown', (evt) => {
-    if (isEscEvent(evt)) {
-      evt.preventDefault();
-      hideMessage(successMessage);
-    }
-  });
-
-  document.addEventListener('click', () => {
-    hideMessage(successMessage);
-  });
+const hideMessage = () => {
+  document.removeEventListener('keydown', closeWithKey);
+  document.removeEventListener('click', closeWithClick);
+  errorMessage.remove();
+  successMessage.remove();
 };
 
 export{showErrorMessage, showSuccessMessage, showLoadingErrorMessage};

@@ -2,7 +2,6 @@ const ROOMS_TEXT_FORM = [
   ' комната',
   ' комнаты',
   ' комнат',
-
 ];
 
 const GUESTS_TEXT_FORM = [
@@ -23,33 +22,33 @@ const changeEndings = (numbers, textForm) => {
   }
 };
 
+const variantsHousing = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+};
+
 const taskTemplateCard = document.querySelector('#card').content;
 const popupTemplate = taskTemplateCard.querySelector('.popup');
 
 const card = {
   showOnPage(onScreenItem) {
-    const popup = popupTemplate.cloneNode(true);
-    const popupTitle = popup.querySelector('.popup__title');
-    const popupAddress = popup.querySelector('.popup__text--address');
-    const popupPrice = popup.querySelector('.popup__text--price');
-    const popupType = popup.querySelector('.popup__type');
-    const popupCapacity = popup.querySelector('.popup__text--capacity');
-    const popupTime = popup.querySelector('.popup__text--time');
-    const popupFeatures = popup.querySelector('.popup__features');
-    const popupDescription = popup.querySelector('.popup__description');
-    const popupPhotos = popup.querySelector('.popup__photos');
-    const popupAvatar = popup.querySelector('.popup__avatar');
+    const popupClone = popupTemplate.cloneNode(true);
+    const popupTitle = popupClone.querySelector('.popup__title');
+    const popupAddress = popupClone.querySelector('.popup__text--address');
+    const popupPrice = popupClone.querySelector('.popup__text--price');
+    const popupType = popupClone.querySelector('.popup__type');
+    const popupCapacity = popupClone.querySelector('.popup__text--capacity');
+    const popupTime = popupClone.querySelector('.popup__text--time');
+    const popupFeatures = popupClone.querySelector('.popup__features');
+    const popupDescription = popupClone.querySelector('.popup__description');
+    const popupPhotos = popupClone.querySelector('.popup__photos');
+    const popupAvatar = popupClone.querySelector('.popup__avatar');
 
     popupTitle.textContent = onScreenItem.offer.title;
     popupAddress.textContent = onScreenItem.offer.address;
     popupPrice.textContent = onScreenItem.offer.price + ' ₽/ночь';
-
-    const variantsHousing = {
-      flat: 'Квартира',
-      bungalow: 'Бунгало',
-      house: 'Дом',
-      palace: 'Дворец',
-    };
 
     popupType.textContent = variantsHousing[onScreenItem.offer.type];
 
@@ -79,7 +78,7 @@ const card = {
     if(onScreenItem.offer.photos.length === 0) {
       popupPhotos.remove();
     } else {
-      let newPhoto = popup.querySelector('.popup__photo').cloneNode(true);
+      let newPhoto = popupClone.querySelector('.popup__photo').cloneNode(true);
       popupPhotos.innerHTML = '';
       onScreenItem.offer.photos.forEach((photo) => {
         newPhoto.src = photo;
@@ -90,7 +89,8 @@ const card = {
 
     popupPhotos.appendChild(photoFragment);
     popupAvatar.src = onScreenItem.author.avatar;
-    return popup
+
+    return popupClone
   },
 };
 
